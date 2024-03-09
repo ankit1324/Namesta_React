@@ -1,38 +1,56 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "../components/Shimmer";
 import { Link } from "react-router-dom";
+import useRestaurantList from "../../utils/useRestaurantList";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 const Body = () => {
-  const [restList, setRestList] = useState([]);
-  const [filteredRestList, setFilteredRestList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [filteredRestList, setFilteredRestList] = useState([]);
+
+  const restList = useRestaurantList();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setFilteredRestList(restList);
+  }, [restList]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://food-sale-server.vercel.app/api/restaurants2?"
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return (
+      <>
+        <div className="loader_div">
+          <div
+            aria-label="Orange and tan hamster running in a metal wheel"
+            role="img"
+            className="wheel-and-hamster"
+          >
+            <div className="wheel"></div>
+            <div className="hamster">
+              <div className="hamster__body">
+                <div className="hamster__head">
+                  <div className="hamster__ear"></div>
+                  <div className="hamster__eye"></div>
+                  <div className="hamster__nose"></div>
+                </div>
+                <div className="hamster__limb hamster__limb--fr"></div>
+                <div className="hamster__limb hamster__limb--fl"></div>
+                <div className="hamster__limb hamster__limb--br"></div>
+                <div className="hamster__limb hamster__limb--bl"></div>
+                <div className="hamster__tail"></div>
+              </div>
+            </div>
+            <div className="spoke"></div>
+          </div>
+          <h1>Please Check your Internet Connection</h1>
+        </div>
+      </>
     );
-    const json = await data.json();
-    console.log(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setRestList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
-
-  if (restList.length === 0) {
-    return <Shimmer />;
   }
 
-  return (
+  return restList.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="filter">
         <button
