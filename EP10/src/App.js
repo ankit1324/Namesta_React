@@ -12,10 +12,10 @@ const About = lazy(() => import("./components/About"));
 
 const App = () => {
   return (
-    <>
+    <div className="bg-yellow-50">
       <Header />
       <Outlet />
-    </>
+    </div>
   );
 };
 

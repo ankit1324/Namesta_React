@@ -19,31 +19,7 @@ const Body = () => {
   if (onlineStatus === false) {
     return (
       <>
-        <div className="loader_div">
-          <div
-            aria-label="Orange and tan hamster running in a metal wheel"
-            role="img"
-            className="wheel-and-hamster"
-          >
-            <div className="wheel"></div>
-            <div className="hamster">
-              <div className="hamster__body">
-                <div className="hamster__head">
-                  <div className="hamster__ear"></div>
-                  <div className="hamster__eye"></div>
-                  <div className="hamster__nose"></div>
-                </div>
-                <div className="hamster__limb hamster__limb--fr"></div>
-                <div className="hamster__limb hamster__limb--fl"></div>
-                <div className="hamster__limb hamster__limb--br"></div>
-                <div className="hamster__limb hamster__limb--bl"></div>
-                <div className="hamster__tail"></div>
-              </div>
-            </div>
-            <div className="spoke"></div>
-          </div>
-          <h1>Please Check your Internet Connection</h1>
-        </div>
+        <h1>Please Check your Internet Connection</h1>
       </>
     );
   }
@@ -51,8 +27,8 @@ const Body = () => {
   return restList.length === 0 ? (
     <Shimmer />
   ) : (
-    <>
-      <div className="filter">
+    <div className="bg-yellow-50">
+      <div className=" m-4 px-4 flex">
         <button
           onClick={() => {
             const filterList = restList.filter(
@@ -60,15 +36,15 @@ const Body = () => {
             );
             setFilteredRestList(filterList);
           }}
-          className="button"
+          className="bg-orange-600 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
         >
           Top Rated Restaurant
         </button>
-        <div className="searchContainer">
+        <div className="ml-6 flex">
           <input
             placeholder="Search"
             type="text"
-            className="input"
+            className="bg-yellow-50 block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
@@ -81,13 +57,13 @@ const Body = () => {
               );
               setFilteredRestList(searchedList);
             }}
-            className="button"
+            className="bg-orange-600 text-white ml-2 px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
           >
             Search
           </button>
         </div>
       </div>
-      <div className="card-container">
+      <div className="bg-yellow-50 m-4 p-4 flex flex-wrap">
         {filteredRestList.map((restaurant) => (
           <Link
             key={restaurant.info.id}
@@ -98,7 +74,7 @@ const Body = () => {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
