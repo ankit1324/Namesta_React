@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withTopRatedLabel } from "./RestaurantCard";
 import Shimmer from "../components/Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../../utils/useRestaurantList";
@@ -9,8 +9,10 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestList, setFilteredRestList] = useState([]);
 
+  const TopRatedRestaurantCard = withTopRatedLabel(RestaurantCard);
+
   const restList = useRestaurantList();
-  console.log(res);
+  // console.log(restList);
 
   useEffect(() => {
     setFilteredRestList(restList);
@@ -33,7 +35,7 @@ const Body = () => {
         <button
           onClick={() => {
             const filterList = restList.filter(
-              (restaurant) => restaurant.info.avgRating > 4
+              (restaurant) => restaurant.info.avgRating > 4.5
             );
             setFilteredRestList(filterList);
           }}
@@ -70,8 +72,12 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
           >
-            {" "}
-            <RestaurantCard resData={restaurant} />{" "}
+            {/* if the restaurant have rating above 4.5 its top rated */}
+            {restaurant.info.avgRating >= 4.5 ? (
+              <TopRatedRestaurantCard resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
