@@ -1,11 +1,15 @@
 import LOGO from "../../public/logo.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/UserContext";
 
 function Header() {
   const [login, setLogin] = useState("Login");
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
+  // console.log(loggedInUser);
 
   function handleLogin() {
     setLogin(login === "Login" ? "Logout" : "Login");
@@ -35,7 +39,7 @@ function Header() {
           </li>
           <li className="px-6 border-4 border-orange-600 rounded-full font-medium hover:text-orange-700 ">
             <button className="button" onClick={handleLogin} id="login">
-              {login}
+              {loggedInUser}
             </button>
           </li>
         </ul>

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import RestaurantCard, { withTopRatedLabel } from "./RestaurantCard";
 import Shimmer from "../components/Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../../utils/useRestaurantList";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/UserContext";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -13,6 +14,8 @@ const Body = () => {
 
   const restList = useRestaurantList();
   // console.log(restList);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     setFilteredRestList(restList);
@@ -43,6 +46,7 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+
         <div className="ml-6 flex">
           <input
             placeholder="Search"
@@ -64,6 +68,16 @@ const Body = () => {
           >
             Search
           </button>
+          <label className="m-2 p-2 font-medium" htmlFor="">
+            User Name
+          </label>
+          <input
+            placeholder="Context-Checker"
+            type="text"
+            className="bg-yellow-50 block ml-4 w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="bg-yellow-50 m-4 p-4 flex flex-wrap">

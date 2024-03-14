@@ -1,7 +1,11 @@
 import { RES_IMG } from "../../utils/constants";
+import { useContext } from "react";
+import UserContext from "../../utils/UserContext";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
+  const { loggedInUser } = useContext(UserContext);
+
   return (
     <>
       <div className="bg-yellow-100 rounded-lg w-[220px] h-96 m-2 p-2 hover:bg-yellow-200">
@@ -21,7 +25,7 @@ const RestaurantCard = (props) => {
             {resData.info.costForTwo}
           </span>
           <span className="m-2 font-medium">{resData.info.avgRating}⭐</span>
-          <div className="card-button"></div>
+          <span className="m-2 font-xs">{loggedInUser}</span>
         </div>
       </div>
     </>
@@ -36,7 +40,7 @@ export const withTopRatedLabel = (RestaurantCard) => {
   return (props) => {
     return (
       <>
-        <label className="m-[1px] p-2 rounded-lg absolute bg-slate-600 text-sm text-white">
+        <label className="m-[1px] p-2 hover:animate-fade rounded-lg absolute bg-slate-600 text-sm text-white">
           Top Rated
         </label>
         <RestaurantCard {...props} />

@@ -6,16 +6,21 @@ import Offer from "./components/Offer";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantPage from "./components/RestaurantPage";
+import UserContext from "../utils/UserContext";
+import { useState } from "react";
 
 const History = lazy(() => import("./components/History"));
 const About = lazy(() => import("./components/About"));
 
 const App = () => {
+  const [userName, setUserName] = useState("User");
   return (
-    <div className="bg-yellow-50">
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="bg-yellow-50 app">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
