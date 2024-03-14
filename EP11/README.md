@@ -1,202 +1,81 @@
-# Explore all the ways of writing css. in react?
+## What is prop drilling?
 
-In React, there are several ways to include CSS styles. Here are some common methods:
+Prop drilling is a term commonly used in the context of React.js, a JavaScript library for building user interfaces. It refers to the practice of passing down data (props) from a parent component to deeply nested child components through intermediary components that do not actually use the data themselves.
 
-- Inline Styles: You can apply styles directly to JSX elements using the style attribute. This approach uses JavaScript objects to define styles.
+For example, imagine you have a hierarchy of components: ParentComponent -> IntermediateComponent -> ChildComponent. If ChildComponent needs some data that is held in ParentComponent, but IntermediateComponent doesn't use that data, you might pass the data down through IntermediateComponent as a prop just to make it accessible to ChildComponent. This passing of props through intermediary components, even though they don't directly use the props themselves, is what is referred to as prop drilling.
 
-```jsx
-const styles = {
-  backgroundColor: "blue",
-  color: "white",
-  padding: "10px",
-};
+Prop drilling can lead to code that is harder to maintain and understand, especially as the application grows larger and the component hierarchy becomes more complex. It can also make it difficult to refactor components or change the structure of the application.
 
-function MyComponent() {
-  return <div style={styles}>Hello, world!</div>;
-}
-```
+To avoid prop drilling, developers often use other techniques like context API, Redux, or other state management libraries to make data accessible to components without having to pass it down through multiple layers of the component tree. These techniques provide a centralized way to manage and access state or data across components without relying on prop drilling.
 
-- CSS Modules: CSS Modules allow you to import CSS files directly into your JavaScript files. The class names are scoped locally to the component, preventing style conflicts.
+## What is lifting the state up?
 
-```jsx
-// styles.module.css
-.myClass {
-color: blue;
-}
+"Lifting state up" is another concept commonly used in React.js development. It refers to the practice of moving the state from a child component to a parent component in order to share that state among multiple components or to manage it at a higher level in the component hierarchy.
 
-// MyComponent.js
-import styles from './styles.module.css';
+When a piece of state is lifted up from a child component to a parent component, the parent component becomes responsible for managing that state, and it can pass down the state and any necessary functions or callbacks as props to its child components.
 
-function MyComponent() {
-return <div className={styles.myClass}>Hello, world!</div>;
-}
-```
+This pattern is often used when multiple components need access to the same state or when a component's state needs to be synchronized with the state of its siblings or parent components.
 
-- CSS-in-JS Libraries: There are libraries like styled-components, emotion, and JSS that allow you to write CSS directly in your JavaScript files using template literals or functions.
+By lifting state up, developers can simplify their code, reduce duplication, and make it easier to manage and reason about the application's state. It also promotes better separation of concerns by keeping related state and behavior in higher-level components rather than scattering them across multiple child components.
+
+## What is Context Provider and Context Consumer?
+
+In React.js, the Context API provides a way to pass data through the component tree without having to pass props down manually at every level. It consists of two main components: the Context Provider and the Context Consumer.
+
+Context Provider:
+The Context Provider is a component that allows its child components to subscribe to a particular context and receive updates whenever the context value changes.
+It accepts a value prop which is the data that it wants to provide to its descendant components.
+The Context Provider wraps around a portion of the component tree and makes the context value available to all components within that tree.
+It's typically placed higher up in the component hierarchy to provide the context data to a broader range of components.
+Example:
 
 ```jsx
-// Using styled-components
-import styled from "styled-components";
+const MyContext = React.createContext();
 
-const StyledDiv = styled.div`
-  color: blue;
-`;
-
-function MyComponent() {
-  return <StyledDiv>Hello, world!</StyledDiv>;
+function App() {
+  const contextValue = "Hello from Context";
+  return (
+    <MyContext.Provider value={contextValue}>
+      <ChildComponent />
+    </MyContext.Provider>
+  );
 }
+Context Consumer:
 ```
 
-= External CSS Files: You can also include traditional external CSS files in your React application, just like you would in any other web project. This approach is straightforward but doesn't offer the benefits of scoping provided by CSS Modules or CSS-in-JS libraries.
+The Context Consumer is a component that subscribes to a context provided by a Context Provider and accesses the context value.
+It allows components to access the context value without the need for prop drilling.
+The Context Consumer is typically used within the render method of a component that needs to access the context data.
+Example:
 
 ```jsx
-// styles.css
-.myClass {
-color: blue;
-}
-
-// MyComponent.js
-import './styles.css';
-
-function MyComponent() {
-return <div className="myClass">Hello, world!</div>;
+function ChildComponent() {
+  return (
+    <MyContext.Consumer>{(value) => <div>{value}</div>}</MyContext.Consumer>
+  );
 }
 ```
 
-Each approach has its advantages and may be more suitable depending on the project requirements and personal preferences.
+In this example, ChildComponent is a consumer of the MyContext context. It receives the context value passed by the nearest MyContext.Provider ancestor and renders it within a div.
 
-# How do we configure tailwind?
+By using the `Context API`, you can avoid prop drilling and manage global state or shared data more efficiently within your React application.
 
-Configuring Tailwind CSS involves a few steps:
+## If you don’t pass a value to the provider does it take the default value?
 
-Installation: First, install Tailwind CSS and its dependencies using npm or yarn.
+Yes, if you don't pass a value to the Provider, it will take the default value specified when creating the context using `React.createContext(defaultValue)`.
 
-```bash
-npm install tailwindcss postcss autoprefixer
-or
-yarn add tailwindcss postcss autoprefixer
-```
-
-Setup Configuration File: Generate a Tailwind configuration file using the npx tailwindcss init command. This will create a tailwind.config.js file in your project root.
-
-bash
-`npx tailwindcss init`
-Include Tailwind in CSS Processing Pipeline: In a typical React project, you're likely using a tool like webpack or Parcel to process CSS. You need to include Tailwind in this processing pipeline. If you're using Create React App, this is typically done through postcss.config.js:
-
-```javascript
-// postcss.config.js
-module.exports = {
-  plugins: [require("tailwindcss"), require("autoprefixer")],
-};
-```
-
-Using Tailwind in Your CSS: Once configured, you can use Tailwind utility classes directly in your CSS or JSX files. Here's an example of how you might include Tailwind classes in your React components:
+For example:
 
 ```jsx
-import React from "react";
+const MyContext = React.createContext("default value");
 
-function MyComponent() {
-  return <div className="bg-blue-500 text-white p-4">Hello, Tailwind CSS!</div>;
+function App() {
+  return (
+    <MyContext.Provider>
+      <ChildComponent />
+    </MyContext.Provider>
+  );
 }
-
-export default MyComponent;
 ```
 
-Purge Unused Styles (Optional, but Recommended for Production): Tailwind includes a lot of utility classes, and in a production build, it's a good idea to remove the unused styles to reduce the final CSS file size. You can do this by configuring the purge option in your tailwind.config.js file:
-
-```javascript
-// tailwind.config.js
-module.exports = {
-  purge: ["./src/**/*.js"],
-  // Other Tailwind config options...
-};
-```
-
-Running Your Development Server: Start your development server as usual (npm start or yarn start). Tailwind should now be configured and ready to use in your React project.
-
-By following these steps, you should have Tailwind CSS set up and integrated into your React project, allowing you to leverage its utility-first approach to styling.
-
-# In tailwind.config.js, what does all the keys mean (content, theme, extend, plugins)?
-
-In a Tailwind CSS configuration file (tailwind.config.js), there are several keys that you can define to customize various aspects of Tailwind's behavior:
-
-## content
-
-This key allows you to specify the content that Tailwind should scan for classes to generate in your CSS output. By default, Tailwind scans files like HTML, JSX, and Vue files for class usage. You can use the content key to add additional files or patterns to be scanned.
-
-```javascript
-// tailwind.config.js
-module.exports = {
-  content: ["./public/**/*.html", "./src/**/*.vue", "./src/**/*.js"],
-  // Other Tailwind config options...
-};
-```
-
-## theme
-
-The theme key allows you to customize various aspects of Tailwind's default design system, such as colors, spacing, typography, breakpoints, and more. You can override default values or add new ones to extend the theme.
-
-```javascript
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        "custom-blue": "#007bff",
-      },
-    },
-  },
-  // Other Tailwind config options...
-};
-```
-
-## extend
-
-The extend key allows you to extend Tailwind's default utility classes with your custom classes. This is useful when you need to add new utilities or override existing ones.
-
-```javascript
-// tailwind.config.js
-module.exports = {
-  extend: {
-    spacing: {
-      72: "18rem",
-    },
-  },
-  // Other Tailwind config options...
-};
-```
-
-## plugins
-
-The plugins key allows you to include additional plugins to extend Tailwind's functionality. These plugins can add new utilities, components, or features to Tailwind.
-
-```javascript
-// tailwind.config.js
-module.exports = {
-  plugins: [
-    require("@tailwindcss/forms"), // Example plugin to style form elements
-    // Other Tailwind plugins...
-  ],
-  // Other Tailwind config options...
-};
-```
-
-These keys provide a powerful way to customize and extend Tailwind CSS to fit the specific needs of your project. They allow you to tailor Tailwind's utility classes, theme, and behavior to match your design requirements.
-
-# Why do we have .postcssrc file?
-
-The `.postcssrc` file, also known as postcss.config.js, is used to configure PostCSS, which is a tool for transforming CSS with JavaScript plugins. This file is typically used in projects that utilize PostCSS, including projects that use Tailwind CSS, Autoprefixer, and other PostCSS plugins.
-
-Here are some reasons why you might use a .postcssrc file:
-
-- Configuration for PostCSS Plugins: If your project utilizes PostCSS plugins like Autoprefixer, cssnano, or any other custom plugins, you can define their configurations in the .postcssrc file. This allows you to specify which plugins to use and how they should be configured.
-
-- Tailwind CSS Integration: If you're using Tailwind CSS, you might configure it within the .postcssrc file. Tailwind CSS is often used with PostCSS to generate the final CSS file, and its configuration can be specified here.
-
-- Consolidated Configuration: Having a centralized configuration file for PostCSS helps keep your project organized. Instead of scattering PostCSS configurations across multiple files, you can gather them all in one place for easier management.
-
-- Flexibility: Using a .postcssrc file gives you flexibility in how you configure PostCSS. You can specify options such as file paths for input and output, plugins to use, and their configurations according to your project's specific requirements.
-
-- Maintainability: Separating PostCSS configurations from other build configuration files (such as webpack.config.js or package.json) can make your project's build setup more maintainable and easier to understand.
-
-Overall, the .postcssrc file provides a way to configure PostCSS and its plugins in your project, offering flexibility, maintainability, and centralized control over the CSS transformation process.
+In this case, since no value prop is provided to the `MyContext.Provider`, it will use the default value `"default value"` that was specified when creating the context. Any consumers of MyContext within the subtree of MyContext.Provider that do not have a matching Provider ancestor will use this default value.
