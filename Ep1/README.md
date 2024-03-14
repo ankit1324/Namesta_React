@@ -1,3 +1,5 @@
+# Chapter 1: Inception
+
 ## What is Emmet?
 
 Emmet is a web development tool that allows developers to write HTML and CSS code faster and more efficiently. It's a plugin for text editors and IDEs (Integrated Development Environments) like Visual Studio Code, Sublime Text, and Atom. Emmet uses abbreviation syntax to generate HTML and CSS code snippets quickly. For example, you can type something like ul>li\*5 and then expand it into an unordered list with five list items automatically. It's a handy tool for speeding up front-end web development workflows.
