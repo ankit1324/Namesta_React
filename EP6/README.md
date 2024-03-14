@@ -1,8 +1,10 @@
-# What is a Microservice?
+# Chapter 06 - Exploring the world
+
+## What is a Microservice?
 
 A microservice is a software development technique where an application is structured as a collection of small, loosely coupled services. Each service is responsible for a specific business function and can be developed, deployed, and scaled independently. Microservices architecture typically emphasizes modularity, flexibility, and resilience, making it easier to maintain and update large, complex systems. This approach contrasts with monolithic architectures, where the entire application is developed and deployed as a single unit.
 
-# What is Monolith architecture
+## What is Monolith architecture
 
 Monolithic architecture is a traditional software design approach where an entire application is built as a single, self-contained unit. In a monolithic architecture, all components of the application, including the user interface, business logic, and data access layers, are tightly integrated and deployed together. This means that any changes or updates to one part of the application require redeploying the entire application.
 
@@ -10,7 +12,7 @@ Monolithic architectures are typically characterized by their simplicity, as all
 
 While monolithic architectures have been widely used for many years, they are increasingly being replaced by more modern approaches, such as microservices architecture, which offer greater flexibility, scalability, and resilience.
 
-# What is the difference between Monolith and Microservice?
+## What is the difference between Monolith and Microservice?
 
 Monolithic architecture and microservices architecture represent two different approaches to designing and building software systems. Here are some key differences between the two:
 
@@ -33,7 +35,7 @@ Monolithic architecture: In a monolithic architecture, a failure in one componen
 Microservices architecture: In a microservices architecture, failures are isolated to individual services, allowing the rest of the system to continue functioning. This can improve overall system resilience and fault tolerance.
 Overall, while monolithic architectures offer simplicity and ease of development, microservices architectures provide greater flexibility, scalability, and resilience, making them a popular choice for building modern, distributed software systems.
 
-# Why do we need a useEffect Hook?
+## Why do we need a useEffect Hook?
 
 The useEffect hook in React is used to perform side effects in function components. Side effects can include data fetching, subscriptions, or manually changing the DOM in ways that React components don't handle automatically.
 
@@ -51,7 +53,7 @@ Here's why we need the useEffect hook:
 
 Overall, the useEffect hook is an essential tool for managing side effects and lifecycle events in function components in React. It provides a clean and concise way to incorporate side effects into your components while ensuring that your code remains easy to understand and maintain.
 
-# What is Optional Chaining?
+## What is Optional Chaining?
 
 Optional chaining is a feature introduced in ECMAScript 2020 (also known as ES11) and is supported in modern JavaScript environments. It provides a concise and safe way to access properties or methods of an object without the need for explicit null or undefined checks.
 
@@ -82,7 +84,7 @@ console.log(array?.[5]); // Output: undefined
 
 This feature simplifies code and reduces the need for verbose null or undefined checks, making JavaScript code more concise and easier to maintain. However, it's essential to ensure that your code is running in an environment that supports optional chaining or use a transpiler like Babel to convert the code to older JavaScript versions for broader compatibility.
 
-# What is Shimmer UI?
+## What is Shimmer UI?
 
 Shimmer UI, also known as Skeleton UI or Skeleton Screens, is a technique used in user interface design to provide users with visual feedback while content is loading. Instead of displaying a blank or empty space, a shimmer effect is used to simulate the appearance of content being loaded gradually.
 
@@ -92,7 +94,7 @@ Shimmer UIs are commonly used in web and mobile applications, especially in scen
 
 In summary, Shimmer UIs are a design pattern used to enhance user experience by displaying animated placeholder content while actual content is being loaded. They help maintain user engagement and provide feedback during loading processes.
 
-# What is the difference between JS expression and JS statement
+## What is the difference between JS expression and JS statement
 
 In JavaScript, expressions and statements are both fundamental building blocks of code, but they serve different purposes and behave differently. Here's the difference between them:
 
@@ -120,7 +122,7 @@ Function call: console.log("Hello, world!");
 
 In summary, expressions produce values, while statements perform actions. An expression can be a part of a statement, but a statement cannot be a part of an expression. Understanding the distinction between expressions and statements is crucial for writing effective and maintainable JavaScript code.
 
-# What is Conditional Rendering, explain with a code example
+## What is Conditional Rendering, explain with a code example
 
 Conditional rendering in JavaScript refers to the practice of displaying different UI elements or content based on certain conditions. This is commonly used in web development to show or hide components, display alternative content, or apply different styles based on user input or application state.
 
@@ -169,7 +171,7 @@ If isLoggedIn is true, we render a welcome message and a logout button. Otherwis
 Clicking the login/logout button triggers the handleLoginToggle function, which updates the isLoggedIn state, causing the UI to re-render with the appropriate content.
 This example demonstrates how conditional rendering can be used to dynamically display different content based on the application's state or user interaction.
 
-# What is CORS?
+## What is CORS?
 
 CORS stands for Cross-Origin Resource Sharing. It is a security feature implemented by web browsers to restrict web applications from making requests to resources on a different domain than the one that served the original web page.
 
@@ -186,7 +188,7 @@ The main CORS headers include:
 - Access-Control-Expose-Headers: Specifies which headers are exposed to the browser in the response.
   By configuring these CORS headers on the server, web developers can control and manage cross-origin requests, allowing safe communication between web applications hosted on different domains while maintaining security.
 
-# What is async and await?
+## What is async and await?
 
 async and await are keywords introduced in ECMAScript 2017 (ES8) to simplify asynchronous JavaScript code and make it easier to work with promises.
 
@@ -216,7 +218,7 @@ async function fetchData() {
 
 By using async and await, you can write asynchronous code in a more synchronous style, making it easier to read and understand, especially when dealing with multiple asynchronous operations that depend on each other. This makes asynchronous JavaScript code feel more like traditional synchronous code while retaining the benefits of non-blocking behavior.
 
-# What is the use of `const json = await data.json();` in getRestaurants()
+## What is the use of `const json = await data.json();` in getRestaurants()
 
 In the context of the `getRestaurants()` function, the line const `json = await data.json();` is used to parse the response data from a network request as JSON. Let's break down what each part of this line does:
 

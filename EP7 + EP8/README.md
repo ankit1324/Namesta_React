@@ -194,7 +194,7 @@ In server-side routing, the routing logic and navigation are handled on the serv
 
 Server-side routing is commonly used in traditional multi-page applications (MPAs) and is still prevalent in many web applications, especially those built with server-side frameworks like Ruby on Rails, Django, and Laravel. However, modern web development practices often combine server-side routing with client-side routing for better performance and user experience.
 
-# EPISODE - 8
+# Chapter 08 - Let's get Classy
 
 # How do you create Nested Routes react-router-dom cofiguration
 

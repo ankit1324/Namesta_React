@@ -1,4 +1,6 @@
-# Explore all the ways of writing css. in react?
+# Chapter 10 - Jo dikhta hai vo bikta hai
+
+## Explore all the ways of writing css. in react?
 
 In React, there are several ways to include CSS styles. Here are some common methods:
 
@@ -47,7 +49,7 @@ function MyComponent() {
 }
 ```
 
-= External CSS Files: You can also include traditional external CSS files in your React application, just like you would in any other web project. This approach is straightforward but doesn't offer the benefits of scoping provided by CSS Modules or CSS-in-JS libraries.
+- External CSS Files: You can also include traditional external CSS files in your React application, just like you would in any other web project. This approach is straightforward but doesn't offer the benefits of scoping provided by CSS Modules or CSS-in-JS libraries.
 
 ```jsx
 // styles.css
@@ -65,7 +67,7 @@ return <div className="myClass">Hello, world!</div>;
 
 Each approach has its advantages and may be more suitable depending on the project requirements and personal preferences.
 
-# How do we configure tailwind?
+## How do we configure tailwind?
 
 Configuring Tailwind CSS involves a few steps:
 
@@ -116,11 +118,11 @@ Running Your Development Server: Start your development server as usual (npm sta
 
 By following these steps, you should have Tailwind CSS set up and integrated into your React project, allowing you to leverage its utility-first approach to styling.
 
-# In tailwind.config.js, what does all the keys mean (content, theme, extend, plugins)?
+## In tailwind.config.js, what does all the keys mean (content, theme, extend, plugins)?
 
 In a Tailwind CSS configuration file (tailwind.config.js), there are several keys that you can define to customize various aspects of Tailwind's behavior:
 
-## content
+#### content
 
 This key allows you to specify the content that Tailwind should scan for classes to generate in your CSS output. By default, Tailwind scans files like HTML, JSX, and Vue files for class usage. You can use the content key to add additional files or patterns to be scanned.
 
@@ -132,7 +134,7 @@ module.exports = {
 };
 ```
 
-## theme
+#### theme
 
 The theme key allows you to customize various aspects of Tailwind's default design system, such as colors, spacing, typography, breakpoints, and more. You can override default values or add new ones to extend the theme.
 
@@ -142,7 +144,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "custom-blue": "#007bff",
+        "custom-blue": "##007bff",
       },
     },
   },
@@ -150,7 +152,7 @@ module.exports = {
 };
 ```
 
-## extend
+#### extend
 
 The extend key allows you to extend Tailwind's default utility classes with your custom classes. This is useful when you need to add new utilities or override existing ones.
 
@@ -166,7 +168,7 @@ module.exports = {
 };
 ```
 
-## plugins
+#### plugins
 
 The plugins key allows you to include additional plugins to extend Tailwind's functionality. These plugins can add new utilities, components, or features to Tailwind.
 
@@ -183,7 +185,7 @@ module.exports = {
 
 These keys provide a powerful way to customize and extend Tailwind CSS to fit the specific needs of your project. They allow you to tailor Tailwind's utility classes, theme, and behavior to match your design requirements.
 
-# Why do we have .postcssrc file?
+## Why do we have .postcssrc file?
 
 The `.postcssrc` file, also known as postcss.config.js, is used to configure PostCSS, which is a tool for transforming CSS with JavaScript plugins. This file is typically used in projects that utilize PostCSS, including projects that use Tailwind CSS, Autoprefixer, and other PostCSS plugins.
 
