@@ -49,6 +49,7 @@ const Body = () => {
 
         <div className="ml-6 flex">
           <input
+            data-testid="searchInput"
             placeholder="Search"
             type="text"
             className="bg-yellow-50 block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
