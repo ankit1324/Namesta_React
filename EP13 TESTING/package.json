@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel index.html",
     "production": "parcel index.html",
-    "test": "jest"
+    "test": "jest",
+    "jest": "jest --watch"
   },
   "author": "",
   "license": "ISC",
