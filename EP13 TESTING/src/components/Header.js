@@ -40,7 +40,7 @@ function Header() {
             <Link to="/cart">Cart({cartItems.length} items)</Link>
           </li>
           <li className="px-6 font-medium hover:text-orange-700">
-            <Link to="/aboutUs">About</Link>
+            <Link to="/aboutUs">{loggedInUser}</Link>
           </li>
           <li className="px-6 border-4 border-orange-600 rounded-full font-medium hover:text-orange-700 ">
             <button className="button" onClick={handleLogin} id="login">
