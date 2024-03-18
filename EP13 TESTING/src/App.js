@@ -10,6 +10,7 @@ import UserContext from "../utils/UserContext";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import appStore from "../utils/appStore";
+import Footer from "./components/Footer";
 
 const Cart = lazy(() => import("./components/Cart"));
 const About = lazy(() => import("./components/About"));
@@ -22,6 +23,7 @@ const App = () => {
         <div className="bg-yellow-50 app">
           <Header />
           <Outlet />
+          <Footer />
         </div>
       </UserContext.Provider>
     </Provider>
