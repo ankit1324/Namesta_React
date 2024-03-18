@@ -29,7 +29,7 @@ it("should render Header component with cartItems", () => {
     </BrowserRouter>
   );
 
-  const cartItems = screen.getByText("Cart(0 items)");
+  const cartItems = screen.getByText("Cart(0)");
   //   const loginButton = screen.getByText("Login");
 
   expect(cartItems).toBeInTheDocument();

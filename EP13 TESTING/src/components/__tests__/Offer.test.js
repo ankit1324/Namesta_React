@@ -3,21 +3,21 @@ import Offer from "../Offer";
 import "@testing-library/jest-dom";
 
 describe("Offer page test cases", () => {
-  beforeAll(() => {
-    console.log("Before All Tests");
-  });
+  // beforeAll(() => {
+  //   console.log("Before All Tests");
+  // });
 
-  beforeEach(() => {
-    console.log("Before Each");
-  });
+  // beforeEach(() => {
+  //   console.log("Before Each");
+  // });
 
-  afterAll(() => {
-    console.log("after All Tests");
-  });
+  // afterAll(() => {
+  //   console.log("after All Tests");
+  // });
 
-  afterEach(() => {
-    console.log("after Each");
-  });
+  // afterEach(() => {
+  //   console.log("after Each");
+  // });
 
   test("Should load Offer Component", () => {
     render(<Offer />);

@@ -5,7 +5,7 @@ import UserContext from "../../utils/UserContext";
 const RestaurantCard = (props) => {
   const { resData } = props;
   // console.log(resData);
-  const { loggedInUser } = useContext(UserContext);
+  // const { loggedInUser } = useContext(UserContext);
 
   return (
     <>
@@ -29,8 +29,8 @@ const RestaurantCard = (props) => {
             {resData.info.costForTwo}
           </span>
           <span className="m-2 font-medium">{resData.info.avgRating}⭐</span>
-          {/* conext api */}
-          <span className="m-2 font-xs">{loggedInUser}</span>
+          {/* context api */}
+          {/* <span className="m-2 font-xs">{loggedInUser}</span> */}
         </div>
       </div>
     </>
