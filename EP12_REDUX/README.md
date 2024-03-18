@@ -1,4 +1,4 @@
-![Redux Notes](/Theory-Redux.png)
+![Redux Notes](/EP12_REDUX\Theory-Redux.png)
 
 # REDUX TOOLKIT
 
