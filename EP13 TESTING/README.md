@@ -1,8 +1,1 @@
-# REDUX TOOLKIT
-
-- Install redux-toolkit & react-redux
-- Build our Store
-- Connect our Store with app
-- Slice (cartSlice)
-- dispatch(action)
-- Selector
+![Setting up Testing](/Screenshot%202024-03-18%20163722.png)
