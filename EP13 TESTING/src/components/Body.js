@@ -42,17 +42,17 @@ const Body = () => {
             );
             setFilteredRestList(filterList);
           }}
-          className="bg-orange-600 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
+          className="bg-orange-600 text-white px-4  rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
         >
           Top Rated Restaurant
         </button>
 
-        <div className="ml-6 flex">
+        <div className="ml-8 flex">
           <input
             data-testid="searchInput"
             placeholder="Search"
             type="text"
-            className="bg-yellow-50 block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            className="bg-yellow-50 block w-56 rounded-md  px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
@@ -65,17 +65,17 @@ const Body = () => {
               );
               setFilteredRestList(searchedList);
             }}
-            className="bg-orange-600 text-white ml-2 px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
+            className="bg-orange-600 text-white ml-2 px-4  rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
           >
             Search
           </button>
-          <label className="m-2 p-2 font-medium" htmlFor="">
-            User Name
+          <label className="m-2 px-2 font-medium" htmlFor="">
+            Username
           </label>
           <input
             placeholder="Context-Checker"
             type="text"
-            className="bg-yellow-50 block ml-4 w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            className="bg-yellow-50 block  w-56 rounded-md  px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />

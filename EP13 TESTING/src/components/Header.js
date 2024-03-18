@@ -21,28 +21,30 @@ function Header() {
   }
   return (
     <div className="flex justify-between bg-yellow-200">
-      <div className="logo w-32 m-4">
-        <img src={LOGO} alt="" />
-      </div>
+      <Link to={"/"}>
+        <div className="logo w-32 m-4">
+          <img src={LOGO} alt="" />
+        </div>
+      </Link>
 
       <div className="menu ">
-        <ul className="flex p-4 m-4">
-          <li className="px-6 font-medium hover:text-orange-700">
+        <ul className="hidden p-4 m-4  md:flex">
+          <li className="px-6 py-2 font-medium hover:text-orange-700">
             Status: {onlineStatus ? "✅" : "🔴"}
           </li>
-          <li className="px-6 font-medium hover:text-orange-700">
+          <li className="px-6 py-2 font-medium hover:text-orange-700">
             <Link to="/">Home </Link>
           </li>
-          <li className="px-6 font-medium hover:text-orange-700">
+          <li className="px-6 py-2 font-medium hover:text-orange-700">
             <Link to="/offer">Offers</Link>
           </li>
-          <li className="px-6 font-semibold text-lg hover:text-orange-700">
-            <Link to="/cart">Cart({cartItems.length} items)</Link>
+          <li className="px-6 py-2 font-medium  hover:text-orange-700">
+            <Link to="/cart">Cart({cartItems.length})</Link>
           </li>
-          <li className="px-6 font-medium hover:text-orange-700">
+          <li className="px-6 py-2 font-medium hover:text-orange-700">
             <Link to="/aboutUs">{loggedInUser}</Link>
           </li>
-          <li className="px-6 border-4 border-orange-600 rounded-full font-medium hover:text-orange-700 ">
+          <li className=" px-6 py-2 font-semibold rounded dark:bg-orange-500 dark:text-gray-800 hover:text-white hover:bg-orange-700">
             <button className="button" onClick={handleLogin} id="login">
               {login}
             </button>
@@ -51,7 +53,6 @@ function Header() {
       </div>
     </div>
   );
-  s;
 }
 
 export default Header;
