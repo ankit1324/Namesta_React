@@ -1,12 +1,40 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/appSlice";
+import { useEffect, useState } from "react";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSerachList, setShowSerachList] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSearchSuggestions(), 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchSuggestions = async () => {
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    // console.log(json?.[1]);
+    setSuggestions(json[1]);
+  };
+
+  const dispatch = useDispatch();
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  };
   return (
     <div className="Header grid grid-flow-col border-b-2 border-grey-500">
       <div className="LogoSection col-span-2 flex">
         <img
-          className="w-10 h-10 mt-[20px] m-4"
+          onClick={toggleMenuHandler}
+          className="w-10 h-10 mt-[20px] m-4 cursor-pointer"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"
           alt="Hamburger Icon"
         />
@@ -19,21 +47,40 @@ const Header = () => {
         </a>
       </div>
       <div className="Search col-span-9 mt-[20px] ml-32">
-        <input
-          className="border  border-gray-400 w-3/4 pl-3 py-2 rounded-l-full"
-          type="text"
-          placeholder=" Search"
-        />
-        <button className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
+        <div>
+          <input
+            className="border  border-gray-400 w-3/4 pl-3 py-2 rounded-l-full"
+            type="text"
+            placeholder=" Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSerachList(true)}
+            onBlur={() => setShowSerachList(false)}
+          />
+          <button className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+          {showSerachList && (
+            <div className="absolute font-mono bg-white py-2 px-5 w-[32rem] shadow-xl rounded-xl border border-gray-100">
+              <ul>
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion}
+                    className="p-1 shadow-sm hover:bg-gray-200 rounded-md"
+                  >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} /> {suggestion}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
       <div className="User flex col-span-1 mt-[20px]">
         <img
           className="w-10 h-10 mr-1"
           src="https://t4.ftcdn.net/jpg/01/98/33/63/360_F_198336329_D3JsfuSGm5UBTXR9fwcr2WhKNebr7SiB.jpg"
           alt=""
-          s
         />
         <img
           className="w-10 h-10"

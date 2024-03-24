@@ -19,15 +19,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
+  //!early Return
+  if (!isMenuOpen) return null;
+
   return (
     <div className="sm:w-56">
       <aside className="w-full p-6 sm:w-56  border-r-2 border-grey-400">
         <nav className="space-y-8 text-sm">
           <div className="space-y-2">
             <h2 className="text-sm font-semibold tracking-widest p-1 pl-2 uppercase dark:text-black hover:bg-gray-200 hover:rounded-2xl">
-              <FontAwesomeIcon icon={faHouseChimney} /> Home
+              <Link to="/">
+                {" "}
+                <FontAwesomeIcon icon={faHouseChimney} /> Home
+              </Link>
             </h2>
             <h2 className="text-sm font-semibold tracking-widest p-1 pl-2 uppercase dark:text-black hover:bg-gray-200 hover:rounded-2xl">
               <FontAwesomeIcon icon={faCameraRetro} /> Shorts
