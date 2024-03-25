@@ -5,14 +5,21 @@ import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
+import { GOOGLE_API_KEY } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [searchedVideo, setSearchedVideo] = useState([]);
 
   const searchCache = useSelector((store) => store.search);
 
   const [showSerachList, setShowSerachList] = useState(false);
+
+  const handleClick = () => {
+    getSearchVideo();
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,6 +34,18 @@ const Header = () => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
+
+  const getSearchVideo = async () => {
+    const data = await fetch(
+      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&order=viewCount&maxResults=50&q=" +
+        searchQuery +
+        "&regionCode=IN&type=videos&key=" +
+        GOOGLE_API_KEY
+    );
+    const json = await data.json();
+    console.log(json.items);
+    setSearchedVideo(json?.items);
+  };
 
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
@@ -74,7 +93,11 @@ const Header = () => {
             onFocus={() => setShowSerachList(true)}
             onBlur={() => setShowSerachList(false)}
           />
-          <button className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full">
+
+          <button
+            className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full"
+            onClick={handleClick}
+          >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
           {showSerachList && (
