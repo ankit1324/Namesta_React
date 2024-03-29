@@ -33,7 +33,7 @@ const itemList = ({ items }) => {
             </div>
             <div className="w-3/12 rounded-xl p-4 ">
               <button
-                className="bg-slate-800 text-white active:animate-fade shadow-lg p-1 absolute mt-24 ml-20 rounded-lg"
+                className="bg-orange-400 ml-1 md:bg-slate-800 text-white active:animate-fade shadow-lg p-1 md:absolute  md:mt-18  rounded-lg"
                 onClick={() => handleAddItem(item)}
               >
                 Add +

@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "production": "parcel index.html",
+    "production": "parcel build index.html",
     "test": "jest",
     "jest": "jest --watch"
   },

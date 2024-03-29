@@ -33,8 +33,8 @@ const Body = () => {
   return restList.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="bg-yellow-50">
-      <div className=" m-4 px-4 flex">
+    <div className="bg-yellow-50 ">
+      <div className="m-4 px-4 flex flex-col md:flex-row items-center justify-center">
         <button
           onClick={() => {
             const filterList = restList.filter(
@@ -42,17 +42,17 @@ const Body = () => {
             );
             setFilteredRestList(filterList);
           }}
-          className="bg-orange-600 text-white px-4  rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
+          className="bg-orange-600 w-56 text-white px-4 py-2 rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none mb-2 md:mb-0 md:mr-2"
         >
           Top Rated Restaurant
         </button>
 
-        <div className="ml-8 flex">
+        <div className="flex items-center md:ml-8">
           <input
             data-testid="searchInput"
             placeholder="Search"
             type="text"
-            className="bg-yellow-50 block w-56 rounded-md  px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            className="bg-yellow-50 block w-full md:w-56 rounded-md px-2 py-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800 mr-2 mb-2 md:mb-0"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
@@ -65,23 +65,30 @@ const Body = () => {
               );
               setFilteredRestList(searchedList);
             }}
-            className="bg-orange-600 text-white ml-2 px-4  rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none"
+            className="bg-orange-600 text-white px-4 py-2 rounded-xl transition duration-200 ease-in-out hover:bg-orange-700 active:bg-orange-900 focus:outline-none mr-2 mb-2 md:mb-0"
           >
             Search
           </button>
-          <label className="m-2 px-2 font-medium" htmlFor="">
+        </div>
+        <div className=" hidden md:flex">
+          <label
+            className=" md:block p-2 font-medium bg-orange-400 border-0 text-white rounded-lg mr-1"
+            htmlFor="username"
+          >
             Username
           </label>
           <input
+            id="username"
             placeholder="Context-Checker"
             type="text"
-            className="bg-yellow-50 block  w-56 rounded-md  px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            className="bg-yellow-50 block w-full md:w-56 rounded-md px-2 py-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />
         </div>
       </div>
-      <div className="bg-yellow-50 m-4 p-4 flex flex-wrap">
+
+      <div className="bg-yellow-50 m-4 p-4 flex flex-wrap justify-center">
         {filteredRestList.map((restaurant) => (
           <Link
             key={restaurant.info.id}

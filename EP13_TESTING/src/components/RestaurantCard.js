@@ -1,6 +1,6 @@
 import { RES_IMG } from "../../utils/constants";
-import { useContext } from "react";
-import UserContext from "../../utils/UserContext";
+// import { useContext } from "react";
+// import UserContext from "../../utils/UserContext";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
@@ -11,16 +11,16 @@ const RestaurantCard = (props) => {
     <>
       <div
         data-testid="resCard"
-        className="bg-yellow-100 rounded-lg w-[220px] h-96 m-2 p-2 hover:bg-yellow-200"
+        className="bg-yellow-100 rounded-lg w-64 h-96 m-2 p-2 hover:bg-yellow-200"
       >
         <img
-          className="h-48 w-48 ml-2 rounded-xl"
+          className="h-48 w-56 ml-2 rounded-xl"
           src={RES_IMG + resData.info.cloudinaryImageId}
           alt=""
         />
         <div className="mb-8 h-20 card-info">
-          <p className="m-2 text-base font-medium">{resData.info.name}</p>
-          <p className="m-2 text-sm font-extralight">
+          <p className="m-2 text-base font-semibold">{resData.info.name}</p>
+          <p className="m-2 text-sm font-normal">
             {resData.info.cuisines.join(", ")}
           </p>
         </div>
@@ -28,7 +28,9 @@ const RestaurantCard = (props) => {
           <span className="m-2 font-medium mr-4">
             {resData.info.costForTwo}
           </span>
-          <span className="m-2 font-medium">{resData.info.avgRating}⭐</span>
+          <span className="m-2 font-medium">
+            {resData.info.avgRating}⭐ Rating
+          </span>
           {/* context api */}
           {/* <span className="m-2 font-xs">{loggedInUser}</span> */}
         </div>

@@ -8,6 +8,7 @@ import { useState } from "react";
 const RestaurantPage = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
+  // console.log(resInfo);
 
   const [showIndex, setShowIndex] = useState(null);
 
@@ -15,15 +16,15 @@ const RestaurantPage = () => {
     return <Shimmer />;
   }
   const { name, cuisines, avgRating, cloudinaryImageId, costForTwoMessage } =
-    resInfo?.cards[0]?.card?.card?.info;
+    resInfo?.cards[2]?.card?.card?.info;
 
   const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
   // console.log(itemCards);
 
   const categories =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c?.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
@@ -38,11 +39,11 @@ const RestaurantPage = () => {
           <img
             src={RES_IMG + cloudinaryImageId}
             alt=""
-            className="w-96 h-96 rounded-full"
+            className="w-72 h-72 rounded-full"
           />
         </div>
         <div className="m-4 p-4 flex-col text-center items-center justify-center">
-          <h1 className="font-semibold text-4xl mb-6">
+          <h1 className="font-semibold text-3xl mb-6">
             {name} - {avgRating}⭐
           </h1>
           <h2 className="font-medium text-2xl mb-6">

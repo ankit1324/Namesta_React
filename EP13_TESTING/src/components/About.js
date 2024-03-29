@@ -4,10 +4,9 @@ import InfoClass from "./infoClass";
 const About = () => {
   return (
     <>
-      <div className="container">
-        <h1>About Us</h1>
+      <div className="container ">
         {/* <Info name={"Ankit(function)"} location={"Palampur"} /> */}
-        <InfoClass name={"Ankit(Class)"} location={"Dharamshala"} />
+        <InfoClass />
       </div>
     </>
   );
