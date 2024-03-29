@@ -66,7 +66,7 @@ const Header = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="Header grid grid-flow-col border-b-2 border-grey-500">
+    <div className="Header grid grid-flow-col border-b-2 border-grey-500 overflow-y-scroll">
       <div className="LogoSection col-span-2 flex">
         <img
           onClick={toggleMenuHandler}
