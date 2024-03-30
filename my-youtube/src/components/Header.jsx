@@ -1,25 +1,19 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
-import { GOOGLE_API_KEY } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [searchedVideo, setSearchedVideo] = useState([]);
-
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
-
-  const [showSerachList, setShowSerachList] = useState(false);
-
-  const handleClick = () => {
-    getSearchVideo();
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,24 +29,11 @@ const Header = () => {
     };
   }, [searchQuery]);
 
-  const getSearchVideo = async () => {
-    const data = await fetch(
-      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&order=viewCount&maxResults=50&q=" +
-        searchQuery +
-        "&regionCode=IN&type=videos&key=" +
-        GOOGLE_API_KEY
-    );
-    const json = await data.json();
-    console.log(json.items);
-    setSearchedVideo(json?.items);
-  };
-
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     // console.log(json?.[1]);
     setSuggestions(json[1]);
-
     //update cache
     dispatch(
       cacheResults({
@@ -61,7 +42,12 @@ const Header = () => {
     );
   };
 
-  const dispatch = useDispatch();
+  const handleSuggestions = (event) => {
+    setSearchQuery(event.target.innerText);
+    setShowSuggestions(false);
+    navigate("/results?search_query=" + encodeURI(event.target.innerText));
+  };
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -90,22 +76,29 @@ const Header = () => {
             placeholder=" Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSerachList(true)}
-            onBlur={() => setShowSerachList(false)}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setShowSuggestions(false)}
           />
 
-          <button
-            className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full"
-            onClick={handleClick}
-          >
+          <button className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
-          {showSerachList && (
+
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute hover:bg-red-500 hover:text-white hover:rounded-full w-9 h-9 right-[20rem] top-[21px]"
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          )}
+          {showSuggestions && (
             <div className="absolute font-mono bg-white py-2 px-5 w-[32rem] shadow-xl rounded-xl border border-gray-100">
               <ul>
                 {suggestions.map((suggestion) => (
                   <li
                     key={suggestion}
+                    onMouseDown={(e) => handleSuggestions(e)}
                     className="p-1 shadow-sm hover:bg-gray-200 rounded-md"
                   >
                     <FontAwesomeIcon icon={faMagnifyingGlass} /> {suggestion}

@@ -1,15 +1,25 @@
-import { Provider } from "react-redux";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import appStore from "./utils/store";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
+import Error from "../src/components/Error";
+import SearchResultContainer from "../src/components/SearchResultContainer";
 
-const appRouter = createBrowserRouter([
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <Body />
+    </div>
+  );
+}
+
+export const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Body />,
+    element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -19,19 +29,12 @@ const appRouter = createBrowserRouter([
         path: "watch",
         element: <WatchPage />,
       },
+      {
+        path: "results",
+        element: <SearchResultContainer />,
+      },
     ],
   },
 ]);
-
-function App() {
-  return (
-    <Provider store={appStore}>
-      <div className="App">
-        <Header />
-        <RouterProvider router={appRouter} />
-      </div>
-    </Provider>
-  );
-}
 
 export default App;
