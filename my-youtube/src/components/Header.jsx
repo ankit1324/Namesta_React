@@ -48,11 +48,15 @@ const Header = () => {
     navigate("/results?search_query=" + encodeURI(event.target.innerText));
   };
 
+  const handleSearchButton = () => {
+    navigate("/results?search_query=" + searchQuery);
+  };
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="Header grid grid-flow-col border-b-2 border-grey-500 overflow-y-scroll">
+    <div className="Header grid grid-flow-col border-b-2 border-grey-500 fixed top-0 left-0 right-0 z-10 bg-white">
       <div className="LogoSection col-span-2 flex">
         <img
           onClick={toggleMenuHandler}
@@ -80,7 +84,10 @@ const Header = () => {
             onBlur={() => setShowSuggestions(false)}
           />
 
-          <button className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full">
+          <button
+            onClick={handleSearchButton}
+            className="bg-slate-200 border border-l-0 border-gray-400 px-6 py-2 rounded-r-full"
+          >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
 

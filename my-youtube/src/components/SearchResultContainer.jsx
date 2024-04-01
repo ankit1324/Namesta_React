@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { openMenu } from "../utils/appSlice";
 import { useSearchParams, Link } from "react-router-dom";
 import { YOUTUBE_SEARCH_VIDEO_WITH_QUERY_API } from "../utils/constants";
+import ButtonList from "../components/ButtonList";
 
 const SearchResultContainer = () => {
   const [searchParams] = useSearchParams();
@@ -24,7 +25,8 @@ const SearchResultContainer = () => {
   };
 
   return (
-    <div className="px-3 col-span-11 mt-10">
+    <div className="px-1 col-span-11 mt-20">
+      <ButtonList />
       <div className="flex flex-col px-3  items-center">
         <div className="p-2 m-2">
           {searchedVideos?.map((video) => (

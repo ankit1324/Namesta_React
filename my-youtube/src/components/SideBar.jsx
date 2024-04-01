@@ -29,13 +29,12 @@ const SideBar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="sm:w-56">
-      <aside className="w-full p-6 sm:w-56  border-r-2 border-grey-400">
+    <div className="sm:w-56 mt-20 ">
+      <aside className="w-full p-6 sm:w-56 max-h-screen fixed hover:overflow-y-scroll overflow-hidden overscroll-contain border-r-2 border-grey-400">
         <nav className="space-y-8 text-sm">
           <div className="space-y-2">
             <h2 className="text-sm font-semibold tracking-widest p-1 pl-2 uppercase dark:text-black hover:bg-gray-200 hover:rounded-2xl">
               <Link to="/">
-                {" "}
                 <FontAwesomeIcon icon={faHouseChimney} /> Home
               </Link>
             </h2>
