@@ -30,7 +30,12 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const proxy = "https://proxy.cors.sh/";
+    const data = await fetch(proxy + YOUTUBE_SEARCH_API + searchQuery, {
+      headers: {
+        "x-cors-api-key": "temp_0365482cc458af27387c46739f0bc494",
+      },
+    });
     const json = await data.json();
     // console.log(json?.[1]);
     setSuggestions(json[1]);
